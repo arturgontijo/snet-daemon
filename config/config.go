@@ -43,9 +43,14 @@ const (
 	RateLimitPerMinute             = "rate_limit_per_minute"
 	SSLCertPathKey                 = "ssl_cert"
 	SSLKeyPathKey                  = "ssl_key"
+
     PaymentChannelCertPath         = "payent_channel_cert_path"
 	PaymentChannelCaPath           = "payent_channel_ca_path"
 	PaymentChannelKeyPath          = "payent_channel_key_path"
+	PaymentChannelCertPathFix      = "payment_channel_cert_path"
+	PaymentChannelCaPathFix        = "payment_channel_ca_path"
+	PaymentChannelKeyPathFix       = "payment_channel_key_path"
+
 	PaymentChannelStorageTypeKey   = "payment_channel_storage_type"
 	PaymentChannelStorageClientKey = "payment_channel_storage_client"
 	PaymentChannelStorageServerKey = "payment_channel_storage_server"

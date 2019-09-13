@@ -101,12 +101,24 @@ func NewEtcdClientFromVip(vip *viper.Viper,metaData *blockchain.OrganizationMeta
 func getTlsConfig() (*tls.Config, error) {
 
 		log.Debug("enabling SSL support via X509 keypair")
-		cert, err := tls.LoadX509KeyPair(config.GetString(config.PaymentChannelCertPath), config.GetString(config.PaymentChannelKeyPath))
+		paymentChannelCert := config.GetString(config.PaymentChannelCertPath)
+		paymentChannelKey := config.GetString(config.PaymentChannelKeyPath)
+		if paymentChannelCert == "" && paymentChannelKey == "" {
+			paymentChannelCert = config.GetString(config.PaymentChannelCertPathFix)
+			paymentChannelKey = config.GetString(config.PaymentChannelKeyPathFix)
+		}
 
+		cert, err := tls.LoadX509KeyPair(paymentChannelCert, paymentChannelKey)
 		if err != nil {
 			panic("unable to load specific SSL X509 keypair for etcd")
 		}
-		caCert, err := ioutil.ReadFile(config.GetString(config.PaymentChannelCaPath))
+
+		paymentChannelCa := config.GetString(config.PaymentChannelCaPath)
+		if paymentChannelCa == "" {
+			paymentChannelCa = config.GetString(config.PaymentChannelCaPathFix)
+		}
+
+		caCert, err := ioutil.ReadFile(paymentChannelCa)
 		if err != nil {
 			return nil, err
 		}

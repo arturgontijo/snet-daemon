@@ -44,7 +44,8 @@ func NewGrpcHandler(serviceMetadata *blockchain.ServiceMetadata) grpc.StreamHand
 		executable:          config.GetString(config.ExecutablePathKey),
 		options:			 grpc.WithDefaultCallOptions(
 								grpc.MaxCallRecvMsgSize(config.GetInt(config.MaxMessageSizeInMB) * 1024 * 1024),
-								grpc.MaxCallSendMsgSize(config.GetInt(config.MaxMessageSizeInMB) * 1024 * 1024)),
+								grpc.MaxCallSendMsgSize(config.GetInt(config.MaxMessageSizeInMB) * 1024 * 1024),
+							 ),
 	}
 
 	switch serviceMetadata.GetServiceType() {
